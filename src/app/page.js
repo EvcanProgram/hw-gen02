@@ -4,12 +4,11 @@ import { Bar, Line } from 'react-chartjs-2';
 import styles from './Dashboard.module.css';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend } from 'chart.js';
 
-
 // Register necessary components for Chart.js
 ChartJS.register(CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend);
 
 export default function Dashboard() {
-  const [lastData, setLastData] = useState([]);
+  const [lastData, setLastData] = useState([]); // Initialize as empty array
   const [allData, setAllData] = useState([]);
 
   // Fetch latest data for the bar charts
@@ -17,7 +16,15 @@ export default function Dashboard() {
     try {
       const res = await fetch("/api/lastestData");
       const data = await res.json();
-      setLastData(data);
+
+      // Check if data is an array
+      if (Array.isArray(data)) {
+        setLastData(data);
+      } else {
+        console.error("Unexpected data format for latest data:", data);
+        setLastData([]); // Set to empty array to avoid errors
+      }
+
       console.log("Latest Data:", data);
     } catch (error) {
       console.error("Error fetching latest data:", error);
@@ -29,7 +36,15 @@ export default function Dashboard() {
     try {
       const res = await fetch("/api/alldata");
       const data = await res.json();
-      setAllData(data);
+
+      // Check if data is an array
+      if (Array.isArray(data)) {
+        setAllData(data);
+      } else {
+        console.error("Unexpected data format for all data:", data);
+        setAllData([]); // Set to empty array to avoid errors
+      }
+
       console.log("All Data:", data);
     } catch (error) {
       console.error("Error fetching all data:", error);
@@ -38,10 +53,10 @@ export default function Dashboard() {
 
   // Process data for bar charts
   const chartData1 = lastData.length > 0 ? {
-    labels: ['LDR', 'VR'],
+    labels: ['Lux', 'Temperature'],
     datasets: lastData.map((dataPoint, index) => ({
       label: `Data Point ${index + 1}`,
-      data: [dataPoint.ldr, dataPoint.vr],
+      data: [dataPoint.lux, dataPoint.temperature],
       backgroundColor: [
         'rgba(75, 192, 192, 0.6)',
         'rgba(153, 102, 255, 0.6)',
@@ -50,7 +65,7 @@ export default function Dashboard() {
   } : null;
 
   const chartData2 = lastData.length > 0 ? {
-    labels: ['Temperature', 'Distance'],
+    labels: ['raindrop_value', 'Distance'],
     datasets: lastData.map((dataPoint, index) => ({
       label: `Data Point ${index + 1}`,
       data: [dataPoint.temp, dataPoint.distance],
@@ -169,56 +184,33 @@ export default function Dashboard() {
         )}
       </div>
 
-      <div className={styles.chartRow}>
-        {allData.length > 0 && lineChartData1 ? (
-          <div className={styles.chartContainer}>
-            <h2>LDR and VR Trends</h2>
-            <Line data={lineChartData1} options={lineChartOptions} />
-          </div>
-        ) : (
-          <p>No data available for the LDR and VR line chart</p>
-        )}
 
-        {allData.length > 0 && lineChartData2 ? (
-          <div className={styles.chartContainer}>
-            <h2>Temperature and Distance Trends</h2>
-            <Line data={lineChartData2} options={lineChartOptions} />
-          </div>
-        ) : (
-          <p>No data available for the Temperature and Distance line chart</p>
-        )}
-      </div>
-      <h1 className={styles.heading}>Lastest Data</h1>
+      <h1 className={styles.heading}>Latest Data</h1>
       <table className={`table table-striped table-bordered ${styles.table}`}>
-        <thead className="thead-dark">
-          <tr>
-            <th>ID</th>
-            <th>LDR</th>
-            <th>VR</th>
-            <th>Temperature</th>
-            <th>Distance</th>
-            <th>Create At</th>
-          </tr>
-        </thead>
-        <tbody>
-          {lastData.map((ldata) => (
-            <tr key={ldata.id}>
-              <td>{ldata.id}</td>
-              <td>{ldata.ldr}</td>
-              <td>{ldata.vr}</td>
-              <td>{ldata.temp}</td>
-              <td>{ldata.distance}</td>
-              <td>
-                {new Date(ldata.date).toLocaleString('th-TH', {
-                  timeZone: 'Asia/Bangkok',
-                  dateStyle: 'short',
-                  timeStyle: 'short',
-                })}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+  <thead className="thead-dark">
+    <tr>
+      <th>ID</th>
+      <th>LUX</th>
+      <th>Temperature</th>
+      <th>raindrop_status</th>
+      <th>raindrop_value</th>
+      <th>vibration_status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {Array.isArray(lastData) && lastData.map((ldata) => (
+      <tr key={ldata.id}>
+        <td>{ldata.id}</td>
+        <td>{ldata.lux}</td>
+        <td>{ldata.temperature}</td>
+        <td>{ldata.raindrop_status}</td>
+        <td>{ldata.raindrop_value}</td>
+        <td>{ldata.vibration_status}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+    </div>  
   );
 }

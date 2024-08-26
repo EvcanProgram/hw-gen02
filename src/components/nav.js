@@ -1,4 +1,4 @@
-"use client"; // This makes the component a Client Component
+"use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -17,7 +17,7 @@ const updateLEDStatus = async (command) => {
 
     const data = await response.json();
 
-    console.log('Response Data:', data);  // เพิ่มการตรวจสอบข้อมูลที่ได้รับ
+    console.log('Response Data:', data);
     if (data.success) {
       alert(`Command updated to ${command}`);
     } else {
