@@ -13,7 +13,7 @@ client.connect();
 export async function GET() {
   try {
     const result = await client.query(`SELECT * 
-    FROM "NRD012"
+    FROM "PHUW022"
     ORDER BY "date" DESC
     LIMIT 1`);
     return new Response(JSON.stringify(result.rows), {
