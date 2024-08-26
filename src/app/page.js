@@ -76,59 +76,6 @@ export default function Dashboard() {
     })),
   } : null;
 
-  // Process data for line charts
-  const lineChartData1 = allData.length > 0 ? {
-    labels: allData.map((dataPoint) => 
-      new Date(dataPoint.date).toLocaleString('th-TH', {
-        timeZone: 'Asia/Bangkok',
-        dateStyle: 'short',
-        timeStyle: 'short',
-      })
-    ),
-    datasets: [
-      {
-        label: 'LDR',
-        data: allData.map((dataPoint) => dataPoint.ldr),
-        fill: false,
-        borderColor: 'rgba(75, 192, 192, 0.6)',
-        tension: 0.1,
-      },
-      {
-        label: 'VR',
-        data: allData.map((dataPoint) => dataPoint.vr),
-        fill: false,
-        borderColor: 'rgba(153, 102, 255, 0.6)',
-        tension: 0.1,
-      },
-    ],
-  } : null;
-
-  const lineChartData2 = allData.length > 0 ? {
-    labels: allData.map((dataPoint) => 
-      new Date(dataPoint.date).toLocaleString('th-TH', {
-        timeZone: 'Asia/Bangkok',
-        dateStyle: 'short',
-        timeStyle: 'short',
-      })
-    ),
-    datasets: [
-      {
-        label: 'Temperature',
-        data: allData.map((dataPoint) => dataPoint.temp),
-        fill: false,
-        borderColor: 'rgba(255, 159, 64, 0.6)',
-        tension: 0.1,
-      },
-      {
-        label: 'Distance',
-        data: allData.map((dataPoint) => dataPoint.distance),
-        fill: false,
-        borderColor: 'rgba(255, 99, 132, 0.6)',
-        tension: 0.1,
-      },
-    ],
-  } : null;
-
   const chartOptions = {
     responsive: true,
     plugins: {
@@ -138,19 +85,6 @@ export default function Dashboard() {
       title: {
         display: true,
         text: 'Latest Sensor Data Visualization',
-      },
-    },
-  };
-
-  const lineChartOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      title: {
-        display: true,
-        text: 'Sensor Data Trends Over Time',
       },
     },
   };

@@ -20,8 +20,8 @@ export async function POST(request) {
       }
 
       const res = await client.query(
-          'UPDATE "NRD012" SET command = $1 WHERE id = $2 RETURNING *',
-          [command, 87] // ใช้ `1` เป็น ID ของแถวที่ต้องการอัปเดต หากมีหลายแถวให้ปรับเป็น ID ที่ต้องการ
+          'UPDATE "PHUW022" SET command = $1 WHERE id = $2 RETURNING *',
+          [command, 3] // ใช้ `1` เป็น ID ของแถวที่ต้องการอัปเดต หากมีหลายแถวให้ปรับเป็น ID ที่ต้องการ
       );
 
       if (res.rowCount === 0) {
@@ -40,11 +40,10 @@ export async function POST(request) {
   }
 }
 
-// ฟังก์ชันจัดการคำขอ GET
 export async function GET() {
   try {
-    // ดึงข้อมูลสถานะปัจจุบันจากฐานข้อมูล
-    const res = await client.query('SELECT command FROM "NRD012" WHERE id = $1', [87]);
+    
+    const res = await client.query('SELECT command FROM "PHUW022" WHERE id = $1', [87]);
 
     if (res.rowCount === 0) {
       throw new Error('No records found');
@@ -55,7 +54,7 @@ export async function GET() {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (error) {
-    // บันทึกข้อผิดพลาดลงใน log.txt
+
     const logPath = path.join(process.cwd(), 'log.txt');
     fs.appendFileSync(logPath, `${new Date().toISOString()} - ${error.message}\n`);
 
