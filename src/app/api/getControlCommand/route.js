@@ -15,7 +15,7 @@ export async function POST(request) {
     const { command } = await request.json();
 
     // Validate the command
-    if (command !== 'RED_ON' && command !== 'GREEN_ON' && command !== 'BLUE_ON' && command !== 'OFF') {
+    if (command !== 'RED_ON' && command !== 'YELLOW_ON' && command !== 'GREEN_ON' && command !== 'OFF') {
       throw new Error('Invalid command');
     }
 

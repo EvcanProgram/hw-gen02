@@ -51,8 +51,8 @@ const Navbar = () => {
           </ul>
           <form className="d-flex">
             <button type="button" className="btn btn-outline-success me-md-2" onClick={() => updateLEDStatus('RED_ON')}>Red Led</button>
-            <button type="button" className="btn btn-outline-primary me-md-2" onClick={() => updateLEDStatus('GREEN_ON')}>Yellow Led</button>
-            <button type="button" className="btn btn-outline-primary me-md-2" onClick={() => updateLEDStatus('BLUE_ON')}>Green Led</button>
+            <button type="button" className="btn btn-outline-primary me-md-2" onClick={() => updateLEDStatus('YELLOW_ON')}>Yellow Led</button>
+            <button type="button" className="btn btn-outline-primary me-md-2" onClick={() => updateLEDStatus('GREEN_ON')}>Green Led</button>
             <button type="button" className="btn btn-outline-danger" onClick={() => updateLEDStatus('OFF')}>Off</button>
           </form>
         </div>
