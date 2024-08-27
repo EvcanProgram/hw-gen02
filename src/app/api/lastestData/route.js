@@ -7,6 +7,8 @@ const client = new Client({
   connectionString: process.env.DATABASE_URL,
 });
 
+export const dynamic = 'force-dynamic';
+
 client.connect();
 
 export async function GET() {
