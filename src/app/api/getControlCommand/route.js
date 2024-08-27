@@ -58,9 +58,8 @@ export async function GET() {
     });
   } catch (error) {
     // Log the error to a file
-    const logPath = path.join(process.cwd(), 'log.txt');
-    fs.appendFileSync(logPath, `${new Date().toISOString()} - ${error.message}\n`);
-
+    console.error(error);
+    
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
