@@ -1,7 +1,5 @@
 // src/app/api/ledControl/route.js
 import { Client } from 'pg';
-import fs from 'fs';
-import path from 'path';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -59,7 +57,7 @@ export async function GET() {
   } catch (error) {
     // Log the error to a file
     console.error(error);
-    
+
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
