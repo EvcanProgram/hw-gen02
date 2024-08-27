@@ -21,7 +21,8 @@ const updateLEDStatus = async (command) => {
     if (data.success) {
       alert(`Command updated to ${command}`);
     } else {
-      alert('Failed to update Command');
+      alert(`Failed to update Command: ${JSON.stringify(data)}`);
+      console.error('Failed to update Command:', data);
     }
   } catch (error) {
     console.error('Error updating Command:', error);
