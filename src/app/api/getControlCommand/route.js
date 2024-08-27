@@ -22,7 +22,7 @@ export async function POST(request) {
     // Update the command in the database
     const res = await client.query(
       'UPDATE "PHUW022" SET command = $1 WHERE id = $2 RETURNING *',
-      [command, 3] // Update the ID to match the specific row you want to control
+      [command, 10] // Update the ID to match the specific row you want to control
     );
 
     if (res.rowCount === 0) {
@@ -44,7 +44,7 @@ export async function POST(request) {
 export async function GET() {
   try {
     // Fetch the command from the database
-    const res = await client.query('SELECT command FROM "PHUW022" WHERE id = $1', [3]);
+    const res = await client.query('SELECT command FROM "PHUW022" WHERE id = $1', [10]);
 
     if (res.rowCount === 0) {
       throw new Error('No records found');
