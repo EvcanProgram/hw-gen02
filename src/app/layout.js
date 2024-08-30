@@ -2,8 +2,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import Navbar from "@/components/nav";
-import BootstrapClient from "@/components/bootstrapClient";
-import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,15 +14,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-      <BootstrapClient />
-      <Navbar />
-
-      <div className="mt-2 mb-2">
+        <Navbar />
+        <div>
           {children}
         </div>
 
-        
-        </body>
+      </body>
     </html>
   );
 }

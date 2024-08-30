@@ -1,7 +1,5 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { Bar, Line } from 'react-chartjs-2';
-import styles from './Dashboard.module.css';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend } from 'chart.js';
 
 // Register necessary components for Chart.js
@@ -51,100 +49,44 @@ export default function Dashboard() {
     }
   }
 
-  // Process data for bar charts
-  const chartData1 = lastData.length > 0 ? {
-    labels: ['Lux', 'Temperature'],
-    datasets: lastData.map((dataPoint, index) => ({
-      label: `Data Point ${index + 1}`,
-      data: [dataPoint.lux, dataPoint.temperature],
-      backgroundColor: [
-        'rgba(75, 192, 192, 0.6)',
-        'rgba(153, 102, 255, 0.6)',
-      ],
-    })),
-  } : null;
-
-  const chartData2 = lastData.length > 0 ? {
-    labels: ['raindrop_value', 'Distance'],
-    datasets: lastData.map((dataPoint, index) => ({
-      label: `Data Point ${index + 1}`,
-      data: [dataPoint.temp, dataPoint.distance],
-      backgroundColor: [
-        'rgba(255, 159, 64, 0.6)',
-        'rgba(255, 99, 132, 0.6)',
-      ],
-    })),
-  } : null;
-
-  const chartOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      title: {
-        display: true,
-        text: 'Latest Sensor Data Visualization',
-      },
-    },
-  };
-
   useEffect(() => {
     fetchLastData();
     fetchAllData();
   }, []);
 
   return (
-    <div className={styles.dashboard}>
-      <h1 className={styles.heading}>Dashboard</h1>
+    <div className="flex flex-col min-h-screen bg-gray-900 text-white pt-4">
+      <h1 className="text-2xl font-bold mb-4 text-center">Dashboard</h1>
 
-      <div className={styles.chartRow}>
-        {lastData.length > 0 && chartData1 ? (
-          <div className={styles.chartContainer}>
-            <h2>LDR and VR</h2>
-            <Bar data={chartData1} options={chartOptions} />
-          </div>
-        ) : (
-          <p>No data available for LDR and VR chart</p>
-        )}
-
-        {lastData.length > 0 && chartData2 ? (
-          <div className={styles.chartContainer}>
-            <h2>Temperature and Distance</h2>
-            <Bar data={chartData2} options={chartOptions} />
-          </div>
-        ) : (
-          <p>No data available for Temperature and Distance chart</p>
-        )}
+      <h1 className="text-xl font-semibold mb-2 text-center">Latest Data</h1>
+      <div className="flex justify-center">
+      <div className="bg-gray-800 rounded-lg shadow-lg p-6 w-full max-w-4xl overflow-x-auto">
+            <table className="min-w-full text-left text-sm font-light bg-gray-800 text-white">
+              <thead className="border-b border-neutral-200 font-medium dark:border-white/10">
+                <tr>
+                  <th scope="col" className="px-6 py-4">ID</th>
+                  <th scope="col" className="px-6 py-4">LUX</th>
+                  <th scope="col" className="px-6 py-4">Temperature</th>
+                  <th scope="col" className="px-6 py-4">Raindrop Status</th>
+                  <th scope="col" className="px-6 py-4">Raindrop Value</th>
+                  <th scope="col" className="px-6 py-4">Vibration Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Array.isArray(lastData) && lastData.map((ldata) => (
+                  <tr key={ldata.id} className="border-b border-dark-200 dark:border-white/10">
+                    <td className="whitespace-nowrap px-6 py-4 font-medium">{ldata.id}</td>
+                    <td className="whitespace-nowrap px-6 py-4">{ldata.lux}</td>
+                    <td className="whitespace-nowrap px-6 py-4">{ldata.temperature}</td>
+                    <td className="whitespace-nowrap px-6 py-4">{ldata.raindrop_status}</td>
+                    <td className="whitespace-nowrap px-6 py-4">{ldata.raindrop_value}</td>
+                    <td className="whitespace-nowrap px-6 py-4">{ldata.vibration_status}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+        </div>
       </div>
-
-
-      <h1 className={styles.heading}>Latest Data</h1>
-      <table className={`table table-striped table-bordered ${styles.table}`}>
-  <thead className="thead-dark">
-    <tr>
-      <th>ID</th>
-      <th>LUX</th>
-      <th>Temperature</th>
-      <th>raindrop_status</th>
-      <th>raindrop_value</th>
-      <th>vibration_status</th>
-    </tr>
-  </thead>
-  <tbody>
-    {Array.isArray(lastData) && lastData.map((ldata) => (
-      <tr key={ldata.id}>
-        <td>{ldata.id}</td>
-        <td>{ldata.lux}</td>
-        <td>{ldata.temperature}</td>
-        <td>{ldata.raindrop_status}</td>
-        <td>{ldata.raindrop_value}</td>
-        <td>{ldata.vibration_status}</td>
-      </tr>
-    ))}
-  </tbody>
-</table>
-
-    </div>  
+    </div>
   );
 }

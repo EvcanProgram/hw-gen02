@@ -30,7 +30,7 @@ export default function HistoryPage() {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="container my-5">
+    <div className="container">
       <h1 className="text-center mb-4">Sensor Data History</h1>
       <div className="table-responsive">
         <table className="table table-striped table-bordered">
@@ -48,7 +48,7 @@ export default function HistoryPage() {
             {items.map((item) => (
               <tr key={item.id}>
                 <td>{item.id}</td>
-                <td>{item.lux}</td>
+                <td>{item.lux}</td> 
                 <td>{item.temperature}</td>
                 <td>{item.raindrop_status}</td>
                 <td>{item.raindrop_value}</td>
