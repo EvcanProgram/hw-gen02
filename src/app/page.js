@@ -1,12 +1,9 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend } from 'chart.js';
-
-// Register necessary components for Chart.js
-ChartJS.register(CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend);
+import Hero from '@/components/hero'
 
 export default function Dashboard() {
-  const [lastData, setLastData] = useState([]); // Initialize as empty array
+  const [lastData, setLastData] = useState([]);
   const [allData, setAllData] = useState([]);
 
   // Fetch latest data for the bar charts
@@ -55,38 +52,60 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-900 text-white pt-4">
-      <h1 className="text-2xl font-bold mb-4 text-center">Dashboard</h1>
-
-      <h1 className="text-xl font-semibold mb-2 text-center">Latest Data</h1>
-      <div className="flex justify-center">
-      <div className="bg-gray-800 rounded-lg shadow-lg p-6 w-full max-w-4xl overflow-x-auto">
-            <table className="min-w-full text-left text-sm font-light bg-gray-800 text-white">
-              <thead className="border-b border-neutral-200 font-medium dark:border-white/10">
-                <tr>
-                  <th scope="col" className="px-6 py-4">ID</th>
-                  <th scope="col" className="px-6 py-4">LUX</th>
-                  <th scope="col" className="px-6 py-4">Temperature</th>
-                  <th scope="col" className="px-6 py-4">Raindrop Status</th>
-                  <th scope="col" className="px-6 py-4">Raindrop Value</th>
-                  <th scope="col" className="px-6 py-4">Vibration Status</th>
-                </tr>
-              </thead>
-              <tbody>
+    
+      <div className="mt-20">
+        <Hero/>
+        <div className="flex justify-leftt ml-10 w-full">
+          <div className="w-full max-w-6xl p-10 rounded-3xl bg-black/70 backdrop-blur-lg shadow-2xl">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-12">
+              <div className="rounded-xl p-6 text-center">
+                <div className="text-white text-lg font-semibold mb-2">LUX</div>
                 {Array.isArray(lastData) && lastData.map((ldata) => (
-                  <tr key={ldata.id} className="border-b border-dark-200 dark:border-white/10">
-                    <td className="whitespace-nowrap px-6 py-4 font-medium">{ldata.id}</td>
-                    <td className="whitespace-nowrap px-6 py-4">{ldata.lux}</td>
-                    <td className="whitespace-nowrap px-6 py-4">{ldata.temperature}</td>
-                    <td className="whitespace-nowrap px-6 py-4">{ldata.raindrop_status}</td>
-                    <td className="whitespace-nowrap px-6 py-4">{ldata.raindrop_value}</td>
-                    <td className="whitespace-nowrap px-6 py-4">{ldata.vibration_status}</td>
-                  </tr>
+                  <div key={ldata.id} className="text-white text-2xl font-bold">
+                    {ldata.lux}
+                  </div>
                 ))}
-              </tbody>
-            </table>
+              </div>
+
+              <div className="rounded-xl p-6 text-center">
+                <div className="text-white text-lg font-semibold mb-2">Temperature</div>
+                {Array.isArray(lastData) && lastData.map((ldata) => (
+                  <div key={ldata.id} className="text-white text-2xl font-bold">
+                    {ldata.temperature}
+                  </div>
+                ))}
+              </div>
+
+              <div className="rounded-xl p-6 text-center">
+                <div className="text-white text-lg font-semibold mb-2">Raindrop Status</div>
+                {Array.isArray(lastData) && lastData.map((ldata) => (
+                  <div key={ldata.id} className="text-white text-2xl font-bold">
+                    {ldata.raindrop_status}
+                  </div>
+                ))}
+              </div>
+
+              <div className="rounded-xl p-6 text-center">
+                <div className="text-white text-lg font-semibold mb-2">Raindrop Value</div>
+                {Array.isArray(lastData) && lastData.map((ldata) => (
+                  <div key={ldata.id} className="text-white text-2xl font-bold">
+                    {ldata.raindrop_value}
+                  </div>
+                ))}
+              </div>
+
+              <div className="rounded-xl p-6 text-center">
+                <div className="text-white text-lg font-semibold mb-2">Vibration Status</div>
+                {Array.isArray(lastData) && lastData.map((ldata) => (
+                  <div key={ldata.id} className="text-white text-2xl font-bold">
+                    {ldata.vibration_status}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+
   );
 }

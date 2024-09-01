@@ -1,9 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import Logo from '../../public/logo.png';
-
 // const updateLEDStatus = async (command) => {
 //   try {
 //     const response = await fetch('/api/getControlCommand', {

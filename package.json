@@ -11,6 +11,8 @@
   "dependencies": {
     "chart.js": "^4.4.3",
     "dotenv": "^16.4.5",
+    "gsap": "^3.12.5",
+    "jquery": "^3.7.1",
     "next": "14.2.5",
     "pg": "^8.12.0",
     "react": "^18",

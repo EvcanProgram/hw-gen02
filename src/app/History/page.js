@@ -6,7 +6,6 @@ export default function HistoryPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-
   useEffect(() => {
     async function fetchData() {
       try {
@@ -26,33 +25,33 @@ export default function HistoryPage() {
     fetchData();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (loading) return <p className="text-center text-gray-500">Loading...</p>;
+  if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
   return (
-    <div className="container">
-      <h1 className="text-center mb-4">Sensor Data History</h1>
-      <div className="table-responsive">
-        <table className="table table-striped table-bordered">
-          <thead className="thead-dark">
+    <div className="container mx-auto p-6">
+      <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">Sensor Data History</h1>
+      <div className="overflow-x-auto shadow-lg rounded-lg">
+        <table className="min-w-full bg-white divide-y divide-gray-200">
+          <thead className="bg-gray-800 text-white">
             <tr>
-              <th>ID</th>
-              <th>LUX</th>
-              <th>Temperature</th>
-              <th>raindrop_status</th>
-              <th>raindrop_value</th>
-              <th>vibration_status</th>
+              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ID</th>
+              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">LUX</th>
+              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Temperature</th>
+              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Raindrop Status</th>
+              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Raindrop Value</th>
+              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Vibration Status</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="bg-white divide-y divide-gray-200">
             {items.map((item) => (
               <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.lux}</td> 
-                <td>{item.temperature}</td>
-                <td>{item.raindrop_status}</td>
-                <td>{item.raindrop_value}</td>
-                <td>{item.vibration_status}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{item.id}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{item.lux}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{item.temperature}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{item.raindrop_status}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{item.raindrop_value}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{item.vibration_status}</td>
               </tr>
             ))}
           </tbody>
