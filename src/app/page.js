@@ -6,6 +6,7 @@ import styles from './Dashboard.module.css'; // Import the custom CSS module
 export default function Dashboard() {
   const [lastData, setLastData] = useState([]);
   const [allData, setAllData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // Fetch latest data for the bar charts
   async function fetchLastData() {
@@ -23,6 +24,8 @@ export default function Dashboard() {
       console.log("Latest Data:", data);
     } catch (error) {
       console.error("Error fetching latest data:", error);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -48,6 +51,9 @@ export default function Dashboard() {
   useEffect(() => {
     fetchLastData();
     fetchAllData();
+    const interval = setInterval(fetchLastData, 5000); // Poll every 5 seconds
+
+    return () => clearInterval(interval); // Clean up interval on component unmount
   }, []);
 
   return (
@@ -59,50 +65,56 @@ export default function Dashboard() {
           className={`w-full max-w-6xl p-10 rounded-3xl bg-gray-900 border-4 border-transparent shadow-2xl backdrop-blur-lg ${styles.animatedBorder}`}
         >
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-12">
-            {lastData.map((ldata) => (
-              <div key={ldata.id} className="rounded-xl p-6 text-center">
-                <div className="text-gray-400 text-lg font-semibold mb-2">LUX</div>
-                <div className="text-white text-2xl font-bold">
-                  {ldata.lux}
-                </div>
-              </div>
-            ))}
+            {loading ? (
+              <div className="text-white text-center">Loading...</div>
+            ) : (
+              <>
+                {lastData.map((ldata) => (
+                  <div key={ldata.id} className="rounded-xl p-6 text-center">
+                    <div className="text-gray-400 text-lg font-semibold mb-2">LUX</div>
+                    <div className="text-white text-2xl font-bold">
+                      {ldata.lux}
+                    </div>
+                  </div>
+                ))}
 
-            {lastData.map((ldata) => (
-              <div key={ldata.id} className="rounded-xl p-6 text-center">
-                <div className="text-gray-400 text-lg font-semibold mb-2">Temperature</div>
-                <div className="text-white text-2xl font-bold">
-                  {ldata.temperature}
-                </div>
-              </div>
-            ))}
+                {lastData.map((ldata) => (
+                  <div key={ldata.id} className="rounded-xl p-6 text-center">
+                    <div className="text-gray-400 text-lg font-semibold mb-2">Temperature</div>
+                    <div className="text-white text-2xl font-bold">
+                      {ldata.temperature}
+                    </div>
+                  </div>
+                ))}
 
-            {lastData.map((ldata) => (
-              <div key={ldata.id} className="rounded-xl p-6 text-center">
-                <div className="text-gray-400 text-lg font-semibold mb-2">Raindrop Status</div>
-                <div className="text-white text-2xl font-bold">
-                  {ldata.raindrop_status}
-                </div>
-              </div>
-            ))}
+                {lastData.map((ldata) => (
+                  <div key={ldata.id} className="rounded-xl p-6 text-center">
+                    <div className="text-gray-400 text-lg font-semibold mb-2">Raindrop Status</div>
+                    <div className="text-white text-2xl font-bold">
+                      {ldata.raindrop_status}
+                    </div>
+                  </div>
+                ))}
 
-            {lastData.map((ldata) => (
-              <div key={ldata.id} className="rounded-xl p-6 text-center">
-                <div className="text-gray-400 text-lg font-semibold mb-2">Raindrop Value</div>
-                <div className="text-white text-2xl font-bold">
-                  {ldata.raindrop_value}
-                </div>
-              </div>
-            ))}
+                {lastData.map((ldata) => (
+                  <div key={ldata.id} className="rounded-xl p-6 text-center">
+                    <div className="text-gray-400 text-lg font-semibold mb-2">Raindrop Value</div>
+                    <div className="text-white text-2xl font-bold">
+                      {ldata.raindrop_value}
+                    </div>
+                  </div>
+                ))}
 
-            {lastData.map((ldata) => (
-              <div key={ldata.id} className="rounded-xl p-6 text-center">
-                <div className="text-gray-400 text-lg font-semibold mb-2">Vibration Status</div>
-                <div className="text-white text-2xl font-bold">
-                  {ldata.vibration_status}
-                </div>
-              </div>
-            ))}
+                {lastData.map((ldata) => (
+                  <div key={ldata.id} className="rounded-xl p-6 text-center">
+                    <div className="text-gray-400 text-lg font-semibold mb-2">Vibration Status</div>
+                    <div className="text-white text-2xl font-bold">
+                      {ldata.vibration_status}
+                    </div>
+                  </div>
+                ))}
+              </>
+            )}
           </div>
         </div>
       </div>
