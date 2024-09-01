@@ -44,7 +44,7 @@ export async function POST(request) {
 export async function GET() {
   try {
     // Fetch the command from the database
-    const res = await client.query('SELECT command FROM "PHUW022" WHERE id = $1', [10]);
+    const res = await client.query('SELECT command FROM "PHUW022" WHERE id = $1', [2]);
 
     if (res.rowCount === 0) {
       throw new Error('No records found');
