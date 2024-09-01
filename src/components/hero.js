@@ -7,14 +7,11 @@ import styles from "./hero.module.css";
 
 export default function Hero() {
   useEffect(() => {
-    // Ensure the animation code runs after the component is mounted
     $('html').mousemove(function (e) {
       var wx = $(window).width();
       var wy = $(window).height();
-
       var x = e.pageX;
       var y = e.pageY;
-
       var newx = x - wx / 2;
       var newy = y - wy / 2;
 
@@ -27,17 +24,13 @@ export default function Hero() {
   }, []);
 
   return (
-    <div>
     <div className={styles.contaianer}>
       <section id="wrapper" className={styles.wrapper}>
         <div className={styles.p1} data-revert="true" data-speed="0.01"></div>
-        {/* <div className={styles.p2} data-speed="0.02"></div>
-        <div className={styles.p3} data-speed="0.01"></div> */}
         <div className={styles.word} data-speed="0">
-          Rasberry
+          Raspberry
         </div>
       </section>
     </div>
-  </div>
   );
 }

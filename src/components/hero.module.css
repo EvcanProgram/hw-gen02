@@ -1,43 +1,34 @@
 .contaianer {
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    background-color: rgba(41, 41, 41, 0);
-    overflow: hidden;
-    font-family: 'Lato', sans-serif;
-  }
-  
-  .wrapper {
-    overflow: hidden;
-    position: absolute;
-    width: 1500px;
-    height: 800px;
-    z-index: 10;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-  }
-  .wrapper div{
-    position: absolute;
-    background-position: center center;
-    background-size: cover;
-  }
-  
-  .p1 {
-    width: 900px;
-    height: 500px;
-    z-index: 100;
-    background-image: url('https://cdn.discordapp.com/attachments/1060180186458505276/1279699679352848497/rasberry.png?ex=66d564b3&is=66d41333&hm=9ac53fd510890dfacf4d0306160be19de8c664ead06cb8501bf1c4e88d21688f&');
-    left: 300px;
-    top: 100px;
-  }
-  
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(41, 41, 41, 0);
+  overflow: hidden;
+  font-family: 'Lato', sans-serif;
+}
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper div {
+  position: absolute;
+  background-position: center center;
+  background-size: cover;
+}
+
+.p1 {
+  width: 900px;
+  height: 500px;
+  z-index: 100;
+  background-image: url('https://cdn.discordapp.com/attachments/1060180186458505276/1279699679352848497/rasberry.png?ex=66d564b3&is=66d41333&hm=9ac53fd510890dfacf4d0306160be19de8c664ead06cb8501bf1c4e88d21688f&');
+}
   /* .p2 {
     width: 927px;
     height: 854px;
@@ -60,22 +51,16 @@
     font-weight: 900;
     color: #ffffff;
     font-size: 14em;
-    top: 30%;
-    margin-top: -115px;
-    width: 100%;
     text-align: center;
     z-index: 7;
     text-transform: uppercase;
-    text-transform: uppercase;
-  background-image: linear-gradient(
-    -225deg,
-    #231557 0%,
-    #44107a 29%,
-    #ff1361 67%,
-    #fff800 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(
+      -225deg,
+      #231557 0%,
+      #44107a 29%,
+      #ff1361 67%,
+      #fff800 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
-
-  

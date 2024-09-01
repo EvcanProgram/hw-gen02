@@ -30,7 +30,7 @@ export default function HistoryPage() {
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">Sensor Data History</h1>
+      <h1 className="text-3xl font-bold text-center text-white mb-8">Sensor Data History</h1>
       <div className="overflow-x-auto shadow-lg rounded-lg">
         <table className="min-w-full bg-white divide-y divide-gray-200">
           <thead className="bg-gray-800 text-white">

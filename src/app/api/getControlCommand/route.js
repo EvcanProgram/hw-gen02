@@ -22,7 +22,7 @@ export async function POST(request) {
     // Update the command in the database
     const res = await client.query(
       'UPDATE "PHUW022" SET command = $1 WHERE id = $2 RETURNING *',
-      [command, 10] // Update the ID to match the specific row you want to control
+      [command, 2] // Update the ID to match the specific row you want to control
     );
 
     if (res.rowCount === 0) {
